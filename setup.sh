@@ -24,13 +24,13 @@ Requires=docker.service
 After=docker.service
 
 [Service]
-Type=simple
-User=root
 WorkingDirectory=/projects/mediaserver
 ExecStart=/usr/local/bin/docker-compose up -d
 ExecStop=/usr/local/bin/docker-compose down
-Restart=always
-RestartSec=10s  # Wait a few seconds before restarting to avoid rapid failure loops
+Type=oneshot
+RemainAfterExit=yes
+TimeoutStartSec=0
+
 
 [Install]
 WantedBy=multi-user.target
